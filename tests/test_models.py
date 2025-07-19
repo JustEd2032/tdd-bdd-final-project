@@ -101,7 +101,7 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(new_product.available, product.available)
         self.assertEqual(new_product.category, product.category)
 
-   def test_read_a_product(self):
+    def test_read_a_product(self):
         """It should Read a product from the database"""
         product = ProductFactory()
         product.id = None
@@ -141,8 +141,11 @@ class TestProductModel(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_list_all_products(self):
-        """It should List all products in the database"""
-        ProductFactory.create_batch(5)
+        """It should List all Products in the database"""
+        for _ in range(5):
+            product = ProductFactory()
+            product.id = None
+            product.create()
 
         products = Product.all()
         self.assertEqual(len(products), 5)
